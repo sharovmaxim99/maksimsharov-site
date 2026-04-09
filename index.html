@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Максим Шаров — руководитель контент-команды / шеф-редактор</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script>
+  window.SITE_ANALYTICS = {
+    // Replace 0 with your counter ID from Yandex Metrica.
+    yandexMetricaId: 108455613
+  };
+</script>
+<script>
+  window.SITE_FORMS = {
+    // Paste here the deployed Google Apps Script web app URL.
+    quizLeadEndpoint: "https://script.google.com/macros/s/AKfycbwW9ELBZ6mMloCCo22ZBm71azcq1OnFjKWm938XhO9Ba-wJK3YVteKaVdc-jTUduAUHXg/exec"
+  };
+</script>
+<script>
+  window.trackGoal = function () {};
+
+  (function () {
+    const counterId = Number(window.SITE_ANALYTICS && window.SITE_ANALYTICS.yandexMetricaId);
+    if (!counterId) return;
+
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () {
+        (m[i].a = m[i].a || []).push(arguments);
+      };
+      m[i].l = 1 * new Date();
+      for (let j = 0; j < document.scripts.length; j += 1) {
+        if (document.scripts[j].src === r) return;
+      }
+      k = e.createElement(t);
+      a = e.getElementsByTagName(t)[0];
+      k.async = 1;
+      k.src = r;
+      a.parentNode.insertBefore(k, a);
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(counterId, "init", {
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+      webvisor: true
+    });
+
+    window.trackGoal = function (goalName) {
+      if (window.ym) {
+        window.ym(counterId, "reachGoal", goalName);
+      }
+    };
+  })();
+</script>
+<style>
+  :root {
+    --black: #0d0d0d;
+    --white: #f5f2eb;
+    --accent: #E8401B;
+    --accent2: #FFB347;
+    --mid: #161616;
+    --mid2: #1e1e1e;
+    --muted: #b6a89c;
+    --text-strong: rgba(245,242,235,0.88);
+    --text-mid: rgba(245,242,235,0.78);
+    --text-soft: rgba(245,242,235,0.68);
+    --text-faint: rgba(245,242,235,0.58);
+    --border: rgba(255,255,255,0.07);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Mulish', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(13,13,13,0.8);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Unbounded', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+
+  /* STATUS PILL */
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 100px; padding: 7px 14px;
+    font-size: 12px; font-weight: 600; color: var(--text-soft);
+    letter-spacing: 0.04em; margin-bottom: 28px;
+  }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; max-width: 1080px; margin: 0 auto; padding: 130px 40px 80px;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-glow { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(232,64,27,0.09) 0%, transparent 70%); right: 5%; top: 50%; transform: translateY(-50%); pointer-events: none; }
+
+  .hero-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(44px, 5.8vw, 80px);
+    font-weight: 900; line-height: 0.95; margin-bottom: 20px;
+    opacity: 0; transform: translateY(40px);
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-role {
+    font-size: clamp(15px, 1.6vw, 19px); color: var(--text-soft); font-weight: 300;
+    margin-bottom: 12px;
+    opacity: 0; transform: translateY(30px);
+    animation: fadeUp 0.8s ease forwards 0.35s;
+  }
+  .hero-geo {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--text-faint); margin-bottom: 36px;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards 0.45s;
+  }
+  .hero-geo-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.25); }
+  .hero-tagline {
+    font-size: clamp(16px, 1.4vw, 18px); line-height: 1.75;
+    color: var(--text-mid); margin-bottom: 44px;
+    max-width: 520px;
+    opacity: 0; transform: translateY(30px);
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+  .hero-cta {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+  .btn-primary { background: var(--accent); color: white; padding: 14px 32px; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; transition: all 0.2s; border: 2px solid var(--accent); }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
+  .btn-secondary { background: transparent; color: var(--white); padding: 14px 32px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 14px; letter-spacing: 0.04em; transition: all 0.2s; border: 2px solid rgba(255,255,255,0.15); }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.4); }
+
+  /* PHOTO FRAME */
+  .hero-right { display: flex; justify-content: center; align-items: center; opacity: 0; transform: scale(0.92); animation: fadeIn 1s ease forwards 0.5s; }
+  .photo-frame {
+    width: 360px; height: 440px; border-radius: 16px; overflow: hidden; position: relative;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 14%; display: block; }
+  /* SECTION COMMON */
+  .section-inner { max-width: 1080px; margin: 0 auto; padding: 90px 40px; }
+  .section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .section-title { font-family: 'Unbounded', sans-serif; font-size: clamp(26px, 3.5vw, 44px); font-weight: 900; line-height: 1.1; margin-bottom: 52px; }
+
+  /* ABOUT */
+  #about { border-top: 1px solid var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: start; }
+  .about-text p { color: var(--text-mid); margin-bottom: 18px; font-size: 15px; }
+  .about-text p strong { color: var(--white); font-weight: 600; }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .skills-card { background: var(--mid); border: 1px solid var(--border); border-radius: 12px; padding: 30px; }
+  .skills-card-title { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 20px; }
+  .skills-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .skill-item { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--text-mid); }
+  .skill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* NUMBERS */
+  #numbers { background: var(--mid); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .numbers-intro { font-size: 15px; color: var(--text-soft); max-width: 540px; margin-bottom: 52px; line-height: 1.8; }
+  .numbers-intro strong { color: var(--text-strong); font-weight: 500; }
+  .numbers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border-radius: 12px; overflow: hidden; }
+  .number-card { background: var(--mid); padding: 36px 28px; transition: background 0.2s; }
+  .number-card:hover { background: #1c1c1c; }
+  .number-val { font-family: 'Unbounded', sans-serif; font-size: clamp(34px, 4vw, 52px); font-weight: 900; line-height: 1; color: var(--white); margin-bottom: 10px; }
+  .number-val span { color: var(--accent); }
+  .number-context { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .number-label { font-size: 13px; color: var(--text-faint); line-height: 1.55; max-width: 200px; }
+
+  /* SERVICES */
+  #services { border-top: 1px solid var(--border); }
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); border-radius: 12px; overflow: hidden; }
+  .service-card { background: var(--black); padding: 40px; transition: background 0.25s; }
+  .service-card:hover { background: #111; }
+  .service-num { font-family: 'Unbounded', sans-serif; font-size: 11px; font-weight: 700; color: rgba(232,64,27,0.5); letter-spacing: 0.15em; margin-bottom: 18px; }
+  .service-title { font-family: 'Unbounded', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 14px; line-height: 1.3; }
+  .service-desc { font-size: 14px; color: var(--text-soft); line-height: 1.75; }
+  .service-tag { display: inline-block; margin-top: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent2); background: rgba(255,179,71,0.07); border: 1px solid rgba(255,179,71,0.18); padding: 4px 12px; border-radius: 100px; }
+
+  /* CASES SLIDER */
+  #cases { border-top: 1px solid var(--border); background: #0a0a0a; }
+  .cases-tabs { display: flex; gap: 2px; margin-bottom: 2px; background: var(--border); border-radius: 12px 12px 0 0; overflow: hidden; }
+  .case-tab {
+    flex: 1; padding: 18px 20px; background: #0a0a0a;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--muted); cursor: pointer; transition: all 0.2s;
+    border-left: 3px solid transparent; text-align: left;
+  }
+  .case-tab:hover { color: var(--text-mid); background: #111; }
+  .case-tab.active { color: var(--white); background: #111; border-left-color: var(--accent); }
+  .case-tab-name { font-size: 13px; font-weight: 700; color: inherit; margin-top: 4px; display: block; }
+
+  .cases-panels { }
+  .case-panel { display: none; background: #111; border-radius: 0 0 12px 12px; padding: 44px 48px; }
+  .case-panel.active { display: grid; grid-template-columns: 1fr 1.6fr; gap: 56px; align-items: start; }
+  .case-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: rgba(232,64,27,0.08); border: 1px solid rgba(232,64,27,0.22); padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+  .case-title { font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 700; line-height: 1.35; margin-bottom: 20px; }
+  .case-story { font-size: 14px; color: var(--text-soft); line-height: 1.8; }
+  .case-metrics { margin-top: 32px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: rgba(255,255,255,0.04); border-radius: 8px; overflow: hidden; }
+  .case-metric { padding: 20px; background: rgba(255,255,255,0.02); }
+  .case-metric-val { font-family: 'Unbounded', sans-serif; font-size: 26px; font-weight: 900; color: var(--accent2); display: block; margin-bottom: 4px; }
+  .case-metric-label { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.09em; }
+
+  /* QUIZ */
+  #quiz { border-top: 1px solid var(--border); }
+  .quiz-inner { max-width: 660px; margin: 0 auto; padding: 90px 40px; }
+  .quiz-card { background: var(--mid); border: 1px solid var(--border); border-radius: 16px; padding: 44px; text-align: center; }
+  .quiz-step { display: none; }
+  .quiz-step.active { display: block; }
+  .quiz-progress { display: flex; gap: 6px; justify-content: center; margin-bottom: 32px; }
+  .quiz-prog-dot { width: 32px; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.1); transition: background 0.3s; }
+  .quiz-prog-dot.done { background: var(--accent); }
+  .quiz-q { font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 700; line-height: 1.45; margin-bottom: 28px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; text-align: left; }
+  .quiz-opt { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; cursor: pointer; font-size: 14px; color: var(--text-mid); transition: all 0.2s; }
+  .quiz-opt:hover { border-color: var(--accent); background: rgba(232,64,27,0.05); color: var(--white); }
+  .quiz-result-text { font-size: 15px; line-height: 1.75; color: var(--text-mid); margin-bottom: 28px; }
+  .quiz-result-text strong { color: var(--accent2); font-weight: 700; }
+  .quiz-summary { display: grid; gap: 12px; margin: 0 0 28px; }
+  .quiz-summary-item {
+    display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 18px;
+    width: 100%; padding: 16px 20px; border-radius: 16px;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    color: var(--text-soft); font-size: 14px; line-height: 1.6; text-align: left;
+  }
+  .quiz-summary-item strong { color: var(--white); font-weight: 700; display: block; }
+  .quiz-lead-card {
+    margin-top: 8px; padding: 24px; text-align: left;
+    border-radius: 14px; border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+  .quiz-lead-title { font-family: 'Unbounded', sans-serif; font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
+  .quiz-lead-sub { font-size: 14px; color: var(--text-soft); line-height: 1.75; margin-bottom: 20px; }
+  .quiz-form-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+  .quiz-form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; min-width: 0; }
+  .quiz-form-field.full { grid-column: 1 / -1; }
+  .quiz-form-label { font-size: 12px; color: var(--text-faint); letter-spacing: 0.04em; }
+  .quiz-form-input,
+  .quiz-form-textarea {
+    width: 100%; border: 1px solid var(--border); border-radius: 10px;
+    background: rgba(255,255,255,0.03); color: var(--white);
+    font: inherit; padding: 13px 14px;
+  }
+  .quiz-form-input::placeholder,
+  .quiz-form-textarea::placeholder { color: rgba(245,242,235,0.38); }
+  .quiz-form-input:focus,
+  .quiz-form-textarea:focus {
+    outline: none; border-color: rgba(232,64,27,0.55);
+    background: rgba(232,64,27,0.04);
+  }
+  .quiz-form-textarea { min-height: 108px; resize: vertical; }
+  .quiz-lead-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .quiz-form-status { min-height: 20px; margin-top: 14px; font-size: 12px; line-height: 1.65; color: var(--text-faint); }
+  .quiz-form-status.success { color: rgba(255,179,71,0.92); }
+  .quiz-form-status.error { color: rgba(232,64,27,0.92); }
+
+  /* EXPERIENCE */
+  #experience { border-top: 1px solid var(--border); }
+  #tools { border-top: 1px solid var(--border); background: #0f0f0f; }
+  .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .timeline-item { padding: 0 0 40px 32px; position: relative; }
+  .timeline-item::before { content: ''; position: absolute; left: -4px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .timeline-period { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+  .timeline-role { font-family: 'Unbounded', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 3px; line-height: 1.3; }
+  .timeline-company { font-size: 13px; color: var(--accent); margin-bottom: 10px; font-weight: 500; }
+  .timeline-desc { font-size: 13px; color: var(--text-faint); line-height: 1.65; }
+
+  /* TOOLS */
+  .tools-panel { }
+  .tools-panel-title { font-family: 'Unbounded', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 28px; }
+  .tools-categories { display: flex; flex-direction: column; gap: 24px; }
+  .tool-cat-label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 12px; }
+  .tools-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tool-item { display: flex; align-items: center; gap: 8px; background: var(--mid2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; transition: all 0.2s; }
+  .tool-item:hover { border-color: rgba(255,255,255,0.18); background: #242424; }
+  .tool-icon { font-size: 16px; line-height: 1; flex-shrink: 0; }
+  .tool-text { }
+  .tool-name { font-size: 13px; font-weight: 600; color: var(--white); display: block; }
+  .tool-desc { font-size: 11px; color: var(--text-faint); display: block; margin-top: 1px; }
+
+  /* CONTACT */
+  #contact { border-top: 1px solid var(--border); background: var(--mid); }
+  .contact-grid { display: grid; grid-template-columns: minmax(0, 700px) 1fr; gap: 56px; align-items: start; }
+  .contact-main { max-width: 700px; }
+  .contact-big { font-family: 'Unbounded', sans-serif; font-size: clamp(26px, 3.5vw, 46px); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+  .contact-big span { color: var(--accent); }
+  .contact-sub { font-size: 15px; color: var(--text-soft); margin-bottom: 36px; line-height: 1.75; max-width: 460px; }
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+  .contact-link { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--white); font-size: 14px; font-weight: 500; padding: 14px 18px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; transition: all 0.2s; }
+  .contact-link:hover { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.05); transform: translateX(4px); }
+  .contact-link-icon { width: 34px; height: 34px; border-radius: 8px; background: rgba(232,64,27,0.1); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .contact-link-label { font-size: 11px; color: var(--text-faint); letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 1px; }
+  .contact-side { display: flex; justify-content: flex-end; padding-top: 106px; }
+  .contact-primary { white-space: nowrap; }
+  #materials { border-top: 1px solid var(--border); background: #171717; }
+  .materials-wrap { max-width: 760px; }
+  .materials-card { padding: 26px 28px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; }
+  .materials-card-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+  .materials-card .materials-list { margin-top: 16px; padding-top: 16px; }
+  .materials-cta { margin-top: 22px; }
+  .materials-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 24px; border-top: 1px solid var(--border); padding-top: 24px; }
+  .materials-list li { font-size: 13px; color: var(--text-faint); padding-left: 18px; position: relative; }
+  .materials-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+  .materials-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+  /* BACK TO TOP */
+  .back-to-top {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(14px);
+    width: 48px; height: 48px; border-radius: 999px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    color: var(--white); text-decoration: none;
+    font-size: 20px; line-height: 1;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease, border-color 0.2s ease;
+    z-index: 120;
+  }
+  .back-to-top:hover {
+    background: rgba(232,64,27,0.16);
+    border-color: rgba(232,64,27,0.38);
+  }
+  .back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-faint); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { to { opacity: 1; transform: scale(1); } }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+
+  @media (max-width: 960px) {
+    #hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+    .hero-right { display: flex; order: -1; margin-bottom: 8px; }
+    .photo-frame { width: min(100%, 360px); height: 420px; }
+    .about-grid, .exp-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-side { justify-content: flex-start; padding-top: 0; }
+    .numbers-grid { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .cases-tabs { flex-direction: column; }
+    .case-panel.active { grid-template-columns: 1fr; gap: 28px; }
+    nav { padding: 14px 24px; }
+    .nav-links { display: none; }
+    .section-inner { padding: 64px 24px; }
+    footer { flex-direction: column; gap: 10px; text-align: center; padding: 28px 24px; }
+  }
+  @media (max-width: 760px) {
+    .quiz-form-grid { grid-template-columns: 1fr; }
+    .quiz-summary-item { grid-template-columns: 1fr; gap: 6px; }
+  }
+  @media (max-width: 600px) {
+    #hero { padding-top: 88px; }
+    .photo-frame { height: 320px; border-radius: 14px; }
+    .numbers-grid { grid-template-columns: 1fr; }
+    .case-metrics { grid-template-columns: 1fr 1fr; }
+    .quiz-card { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">МШ</a>
+  <ul class="nav-links">
+    <li><a href="#about">О себе</a></li>
+    <li><a href="#numbers">Цифры</a></li>
+    <li><a href="#services">Чем могу помочь</a></li>
+    <li><a href="#cases">Кейсы</a></li>
+    <li><a href="#contact">Контакты</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-left">
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      Открыт к предложениям
+    </div>
+    <h1 class="hero-name">Максим<br><span>Шаров</span></h1>
+    <p class="hero-role">Руководитель контент-команды / шеф-редактор / руководитель редакции</p>
+    <div class="hero-geo">
+      <span>Москва · удалённо / гибрид</span>
+    </div>
+    <p class="hero-tagline">
+      Последние несколько лет развивал контент и соцсети в международном агентстве недвижимости Neginski: вырос из копирайтера до шеф-редактора и руководителя команды. Лучше всего чувствую себя там, где нужно быстро собрать систему, держать качество и адаптировать стратегию под изменения на рынке и срочные задачи бизнеса.
+    </p>
+    <div class="hero-cta">
+      <a href="https://t.me/shmaxim99" class="btn-primary" target="_blank" onclick="trackGoal('hero_contact_click')">Написать мне</a>
+      <a href="#cases" class="btn-secondary">Смотреть кейсы</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-frame">
+      <img src="maksim-sharov-photo.jpg" alt="Максим Шаров">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-eyebrow">О себе</div>
+        <h2 class="section-title">Редактор, который думает цифрами</h2>
+        <p>В <strong>Neginski</strong> я пришёл копирайтером, а потом вырос до шеф-редактора и руководителя команды. Работал на стыке редактуры, соцсетей, лидогенерации и менеджмента: от контент-планов и финального апрува до найма авторов, онбординга и аналитики.</p>
+        <p>Сильная сторона — собирать рабочую систему там, где без неё быстро начинается хаос: распределить нагрузку, зафиксировать требования, собрать базу знаний, регламенты и онбординг в Notion, а потом держать всё это в рабочем состоянии.</p>
+        <p>Спокойно вхожу в периоды изменений: когда меняется рынок, перегружается команда или бизнесу нужно быстро проверить новую гипотезу, могу оперативно пересобрать приоритеты и контентную стратегию без потери качества.</p>
+        <p>После завершения работы в <strong>Neginski</strong> в марте 2026 ищу команду, где нужен человек, который умеет держать вместе качество, темп и здравый смысл.</p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="skills-card">
+          <div class="skills-card-title">Что умею</div>
+          <ul class="skills-list">
+            <li class="skill-item"><span class="skill-dot"></span>Управление контент-командой</li>
+            <li class="skill-item"><span class="skill-dot"></span>Контент-стратегия</li>
+            <li class="skill-item"><span class="skill-dot"></span>Telegram</li>
+            <li class="skill-item"><span class="skill-dot"></span>Лидогенерация через контент</li>
+            <li class="skill-item"><span class="skill-dot"></span>Редакционные процессы</li>
+            <li class="skill-item"><span class="skill-dot"></span>Контент-планирование</li>
+            <li class="skill-item"><span class="skill-dot"></span>Лидмагниты и квизы</li>
+            <li class="skill-item"><span class="skill-dot"></span>Воронки в Telegram-ботах</li>
+            <li class="skill-item"><span class="skill-dot"></span>Аналитика контента</li>
+            <li class="skill-item"><span class="skill-dot"></span>Найм и онбординг авторов</li>
+            <li class="skill-item"><span class="skill-dot"></span>TOV, редполитика и база знаний</li>
+            <li class="skill-item"><span class="skill-dot"></span>Notion как база знаний и процессов</li>
+            <li class="skill-item"><span class="skill-dot"></span>Адаптация стратегии в условиях изменений</li>
+            <li class="skill-item"><span class="skill-dot"></span>Взаимодействие с маркетингом, продажами, performance и CRM</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section id="numbers">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Цифры</div>
+    <h2 class="section-title reveal">Результаты за 17 месяцев в роли шеф-редактора</h2>
+    <p class="numbers-intro reveal">Ноябрь 2024 — март 2026, два Telegram-канала компании: ОАЭ и Москва. <strong>Это не разовый удачный месяц, а стабильный результат в регулярной работе.</strong></p>
+    <div class="numbers-grid">
+      <div class="number-card reveal">
+        <div class="number-context">Лиды · ежемесячно</div>
+        <div class="number-val">548<span>/мес</span></div>
+        <div class="number-label">Среднее количество лидов с двух Telegram-каналов</div>
+      </div>
+      <div class="number-card reveal reveal-delay-1">
+        <div class="number-context">Квалы · ежемесячно</div>
+        <div class="number-val">99<span>/мес</span></div>
+        <div class="number-label">Квалифицированных лидов в месяц в среднем</div>
+      </div>
+      <div class="number-card reveal reveal-delay-2">
+        <div class="number-context">Конверсия в квал</div>
+        <div class="number-val">17<span>,9%</span></div>
+        <div class="number-label">Средняя конверсия из лида в квалифицированный</div>
+      </div>
+      <div class="number-card reveal">
+        <div class="number-context">Онбординг авторов</div>
+        <div class="number-val">2<span> нед</span></div>
+        <div class="number-label">Вместо 1–2 месяцев — после внедрения системы адаптации</div>
+      </div>
+      <div class="number-card reveal reveal-delay-1">
+        <div class="number-context">Качество редактуры</div>
+        <div class="number-val">×2</div>
+        <div class="number-label">Меньше правок после первичной редактуры за счёт новых требований</div>
+      </div>
+      <div class="number-card reveal reveal-delay-2">
+        <div class="number-context">Команда</div>
+        <div class="number-val">5<span> человек</span></div>
+        <div class="number-label">Редактор, 2 автора и 2 дизайнера в одной команде</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Чем могу помочь</div>
+    <h2 class="section-title reveal">Задачи, в которых я разбираюсь</h2>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-title">Управление редакцией</div>
+        <div class="service-desc">Могу взять на себя редакцию целиком: планы, загрузку команды, качество материалов, финальный апрув, онбординг авторов и рабочую связку с маркетингом и продажами.</div>
+        <div class="service-tag">Управление · Процессы</div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">02</div>
+        <div class="service-title">Социальные сети и редакционная стратегия</div>
+        <div class="service-desc">Помогу выстроить соцсети как рабочий канал, а не набор разрозненных постов: стратегия, рубрики, прогрев, офферы и понятная логика для команды. Если меняется рынок или задача бизнеса, могу быстро пересобрать направление без хаоса.</div>
+        <div class="service-tag">Соцсети · Стратегия</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">03</div>
+        <div class="service-title">Лидмагниты, квизы и воронки</div>
+        <div class="service-desc">Есть опыт запуска лидмагнитов, квизов и воронок в ManyChat с интеграцией в amoCRM: от логики сценария и постановки задач до тестов, аналитики и правок по результатам.</div>
+        <div class="service-tag">ManyChat · amoCRM</div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">04</div>
+        <div class="service-title">Редполитика, база знаний и онбординг</div>
+        <div class="service-desc">Могу собрать или обновить редакционные правила: редполитику, TOV, базу знаний, регламенты, чек-листы и онбординг в Notion, чтобы качество не держалось на одном человеке и не терялось при росте команды.</div>
+        <div class="service-tag">Notion · TOV</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES SLIDER -->
+<section id="cases">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Кейсы</div>
+    <h2 class="section-title reveal">Конкретные задачи и результаты</h2>
+    <div class="reveal">
+      <div class="cases-tabs">
+        <div class="case-tab active" onclick="switchCase(0)">
+          <span>01 · Кампания</span>
+          <span class="case-tab-name">Семейная ипотека</span>
+        </div>
+        <div class="case-tab" onclick="switchCase(1)">
+          <span>02 · Инструмент</span>
+          <span class="case-tab-name">Квизы в TG-боте</span>
+        </div>
+        <div class="case-tab" onclick="switchCase(2)">
+          <span>03 · Гипотеза</span>
+          <span class="case-tab-name">Каталог с воронкой</span>
+        </div>
+        <div class="case-tab" onclick="switchCase(3)">
+          <span>04 · Система</span>
+          <span class="case-tab-name">Онбординг авторов</span>
+        </div>
+        <div class="case-tab" onclick="switchCase(4)">
+          <span>05 · Масштабирование</span>
+          <span class="case-tab-name">Сочи и Кипр</span>
+        </div>
+      </div>
+      <div class="cases-panels">
+
+        <div class="case-panel active" id="case-0">
+          <div>
+            <div class="case-badge">Контент-кампания</div>
+            <div class="case-title">Ситуативная кампания по семейной ипотеке в Москве</div>
+            <div class="case-story">Когда стало понятно, что условия семейной ипотеки изменятся, перестроил контент-стратегию Telegram-канала Москвы под эту повестку: усилил темы, работавшие на срочность решения, подобрал офферы с наиболее выгодными условиями, добавил отдельный лидмагнит и связал продуктовый контент с экспертным прогревом и отработкой возражений. В результате кампания дала 117 заявок, 25 квалов и 2 брони.</div>
+          </div>
+          <div>
+            <div class="case-metrics">
+              <div class="case-metric"><span class="case-metric-val">117</span><span class="case-metric-label">Заявок</span></div>
+              <div class="case-metric"><span class="case-metric-val">25</span><span class="case-metric-label">Квалов</span></div>
+              <div class="case-metric"><span class="case-metric-val">21,4%</span><span class="case-metric-label">CRQ</span></div>
+              <div class="case-metric"><span class="case-metric-val">$492K</span><span class="case-metric-label">Бюджет сделок</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-panel" id="case-1">
+          <div>
+            <div class="case-badge">Продуктовая гипотеза</div>
+            <div class="case-title">Перенос квизов из Marquiz в Telegram-бот</div>
+            <div class="case-story">Внешний квиз в Marquiz добавлял лишний шаг между контентом и заявкой. Я предложил перенести квизы внутрь Telegram-бота, чтобы сократить трение, повысить доходимость и проверить качество лидов. Отвечал за идею, логику сценариев, сборку флоу, тестирование и интеграцию с amoCRM. В тесте запустили 3 квиза: лучший показал CRQ 40%, ещё один — 27,3%.</div>
+          </div>
+          <div>
+            <div class="case-metrics">
+              <div class="case-metric"><span class="case-metric-val">3</span><span class="case-metric-label">Квиза запущено</span></div>
+              <div class="case-metric"><span class="case-metric-val">80</span><span class="case-metric-label">Запусков во 2-м тесте</span></div>
+              <div class="case-metric"><span class="case-metric-val">11</span><span class="case-metric-label">Лидов во 2-м тесте</span></div>
+              <div class="case-metric"><span class="case-metric-val">40%</span><span class="case-metric-label">Лучший CRQ</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-panel" id="case-2">
+          <div>
+            <div class="case-badge">Тест механики</div>
+            <div class="case-title">Каталог по ОАЭ с воронкой в Telegram-боте</div>
+            <div class="case-story">Проверил механику, в которой часть лидмагнитов отдавалась по открытой ссылке, а внутри материала запускалась отдельная воронка в Telegram-боте с сегментацией и предквалификацией. Для гайдов модель не сработала, а для каталогов — да. Один из каталогов по ОАЭ получил 285 просмотров, 43 клика внутри материала, 40 запусков воронки, 9 контактов, 6 лидов и вышел на сделку на $316K.</div>
+          </div>
+          <div>
+            <div class="case-metrics">
+              <div class="case-metric"><span class="case-metric-val">285</span><span class="case-metric-label">Просмотров каталога</span></div>
+              <div class="case-metric"><span class="case-metric-val">43</span><span class="case-metric-label">Клика в материале</span></div>
+              <div class="case-metric"><span class="case-metric-val">6</span><span class="case-metric-label">Лидов из воронки</span></div>
+              <div class="case-metric"><span class="case-metric-val">$316K</span><span class="case-metric-label">Сделка</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-panel" id="case-3">
+          <div>
+            <div class="case-badge">Системная задача</div>
+            <div class="case-title">Онбординг авторов за 2 недели</div>
+            <div class="case-story">Стандартная адаптация нового автора занимала 1–2 месяца. Собрал систему онбординга, обновил требования к текстам, разборы ошибок и регламенты. В итоге базовая адаптация сократилась до 2 недель, а правок после первичной редактуры стало примерно в 2 раза меньше.</div>
+          </div>
+          <div>
+            <div class="case-metrics">
+              <div class="case-metric"><span class="case-metric-val">2 нед</span><span class="case-metric-label">Вместо 1–2 мес</span></div>
+              <div class="case-metric"><span class="case-metric-val">6</span><span class="case-metric-label">Нанятых авторов</span></div>
+              <div class="case-metric"><span class="case-metric-val">×2</span><span class="case-metric-label">Меньше правок</span></div>
+              <div class="case-metric"><span class="case-metric-val">1–2 мес</span><span class="case-metric-label">Старый срок адаптации</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-panel" id="case-4">
+          <div>
+            <div class="case-badge">Тест направления</div>
+            <div class="case-title">Запуск и тест новых гео: Сочи и Кипр</div>
+            <div class="case-story">Когда компания пошла в новые рынки, мне передали направления Сочи и Кипр. Под быстрый тест спроса с нуля запустили новые Telegram-каналы: изучили аудиторию и её потребности, провели созвоны с экспертами, собрали контент-стратегии и контент-планы, а затем вышли в тест при ограниченных бюджетах. По Сочи за 6 месяцев получили 265 заявок, 70 квалов и 2 сделки. По Кипру за 8 месяцев — 55 заявок и 16 квалов. Запуск помог быстро проверить спрос в новых гео и понять, как дальше развивать эти направления.</div>
+          </div>
+          <div>
+            <div class="case-metrics">
+              <div class="case-metric"><span class="case-metric-val">265</span><span class="case-metric-label">Заявок по Сочи</span></div>
+              <div class="case-metric"><span class="case-metric-val">70</span><span class="case-metric-label">Квалов по Сочи</span></div>
+              <div class="case-metric"><span class="case-metric-val">55</span><span class="case-metric-label">Заявок по Кипру</span></div>
+              <div class="case-metric"><span class="case-metric-val">16</span><span class="case-metric-label">Квалов по Кипру</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="quiz-inner">
+    <div class="section-eyebrow reveal" style="text-align:center;">Пара вопросов</div>
+    <h2 class="section-title reveal" style="text-align:center; font-size: clamp(22px, 3vw, 34px); margin-bottom: 36px;">Подходим ли мы друг другу?</h2>
+    <div class="quiz-card reveal">
+      <div class="quiz-progress">
+        <div class="quiz-prog-dot done" id="d0"></div>
+        <div class="quiz-prog-dot" id="d1"></div>
+        <div class="quiz-prog-dot" id="d2"></div>
+      </div>
+      <div class="quiz-step active" id="step0">
+        <div class="quiz-q">Какая из этих ситуаций вам сейчас ближе?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="nextQ(1, this)">Есть команда, но нет системы — каждый раз как первый</div>
+          <div class="quiz-opt" onclick="nextQ(1, this)">Контент есть, но непонятно, как он влияет на лиды</div>
+          <div class="quiz-opt" onclick="nextQ(1, this)">Хотим запустить соцсети как канал продаж</div>
+          <div class="quiz-opt" onclick="nextQ(1, this)">Ищем шеф-редактора, который возьмёт редакцию на себя</div>
+        </div>
+      </div>
+      <div class="quiz-step" id="step1">
+        <div class="quiz-q">Какую роль у вас сейчас играют соцсети?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="nextQ(2, this)">Один из основных каналов лидогенерации</div>
+          <div class="quiz-opt" onclick="nextQ(2, this)">Канал есть, но непонятно, приносит ли он результат</div>
+          <div class="quiz-opt" onclick="nextQ(2, this)">Хотим запустить, но пока не понимаем, с чего начать</div>
+          <div class="quiz-opt" onclick="nextQ(2, this)">Это скорее второстепенный канал</div>
+        </div>
+      </div>
+      <div class="quiz-step" id="step2">
+        <div class="quiz-q">Что для вас главное в будущем шеф-редакторе?</div>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="showRes(this)">Чтобы выстроил процессы — и работало без него</div>
+          <div class="quiz-opt" onclick="showRes(this)">Чтобы сам писал, редактировал и был в теме</div>
+          <div class="quiz-opt" onclick="showRes(this)">Чтобы думал о конверсиях, а не только о текстах</div>
+          <div class="quiz-opt" onclick="showRes(this)">Чтобы держал вместе стратегию, качество и процессы</div>
+        </div>
+      </div>
+      <div class="quiz-step" id="result">
+        <div class="quiz-result-text">Если узнали в этом свою задачу, можно сразу перейти к контакту ниже или оставить свои данные, и я сам свяжусь с вами.</div>
+        <div class="quiz-summary" id="quizSummary"></div>
+        <form class="quiz-lead-card" id="quizLeadForm" method="POST" target="quizLeadTarget" onsubmit="return submitQuizLeadForm(event)">
+          <div class="quiz-lead-title">Последний шаг</div>
+          <div class="quiz-lead-sub">Оставьте контакт и пару слов о задаче. Если удобнее, можно сразу написать мне в Telegram. Если нет, я сам вернусь к вам по оставленным данным.</div>
+          <div class="quiz-form-grid">
+            <div class="quiz-form-field">
+              <label class="quiz-form-label" for="quizName">Как к вам обращаться</label>
+              <input class="quiz-form-input" id="quizName" type="text" placeholder="Имя / компания">
+            </div>
+            <div class="quiz-form-field">
+              <label class="quiz-form-label" for="quizContact">Контакт</label>
+              <input class="quiz-form-input" id="quizContact" type="text" placeholder="Telegram / телефон / email">
+            </div>
+            <div class="quiz-form-field full">
+              <label class="quiz-form-label" for="quizComment">Что за задача</label>
+              <textarea class="quiz-form-textarea" id="quizComment" placeholder="Например: нужен шеф-редактор, надо собрать процессы, хотим проверить соцсети как канал лидогенерации"></textarea>
+            </div>
+          </div>
+          <input type="hidden" name="name" id="quizLeadName">
+          <input type="hidden" name="contact" id="quizLeadContact">
+          <input type="hidden" name="comment" id="quizLeadComment">
+          <input type="hidden" name="quizSituation" id="quizLeadSituation">
+          <input type="hidden" name="quizSocials" id="quizLeadSocials">
+          <input type="hidden" name="quizExpectation" id="quizLeadExpectation">
+          <input type="hidden" name="pageUrl" id="quizLeadPageUrl">
+          <input type="hidden" name="userAgent" id="quizLeadUserAgent">
+          <div class="quiz-lead-actions">
+            <a href="https://t.me/shmaxim99" class="btn-primary" target="_blank" onclick="trackGoal('quiz_telegram_click')">Написать в Telegram</a>
+            <button type="submit" class="btn-secondary" id="quizLeadSubmit" style="cursor:pointer;">Оставить контакт</button>
+          </div>
+          <div class="quiz-form-status" id="quizLeadStatus"></div>
+        </form>
+        <iframe name="quizLeadTarget" id="quizLeadTarget" style="display:none;"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Опыт</div>
+    <h2 class="section-title reveal">Откуда всё это</h2>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-period">Ноябрь 2024 — Март 2026</div>
+        <div class="timeline-role">Шеф-редактор</div>
+        <div class="timeline-company">Neginski — международное агентство недвижимости</div>
+        <div class="timeline-desc">Планы публикаций, качество материалов, лидмагниты, процессы, база знаний в Notion, найм, аналитика и взаимодействие со смежными командами. Два Telegram-канала: ОАЭ и Москва.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">Август 2023 — Ноябрь 2024</div>
+        <div class="timeline-role">Редактор Telegram-каналов</div>
+        <div class="timeline-company">Neginski</div>
+        <div class="timeline-desc">Ведение каналов по ОАЭ и Москве, работа с авторами, редактура текстов, участие в планировании.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">Июнь 2023 — Август 2023</div>
+        <div class="timeline-role">Копирайтер</div>
+        <div class="timeline-company">Neginski</div>
+        <div class="timeline-desc">Подготовка контента для Telegram-канала по рынку ОАЭ.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-period">Январь 2022 — Октябрь 2022</div>
+        <div class="timeline-role">Старший копирайтер</div>
+        <div class="timeline-company">Симпл-Текнолоджи / СИМПЛ-SMM</div>
+        <div class="timeline-desc">Контент для соцсетей и digital-проектов, TOV, продающие и имиджевые тексты, обучение новых авторов, участие в подготовке контент-планов и упаковке кейсов.</div>
+      </div>
+      <div class="timeline-item" style="padding-bottom: 0;">
+        <div class="timeline-period">Апрель 2021 — Январь 2022</div>
+        <div class="timeline-role">Новостной редактор</div>
+        <div class="timeline-company">Сетевое издание «Экология России»</div>
+        <div class="timeline-desc">Мониторинг новостной повестки, подготовка новостей, работа с российскими и зарубежными источниками, публикация материалов в CMS.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">Инструменты</div>
+    <h2 class="section-title reveal">С чем работаю</h2>
+    <div class="tools-panel reveal">
+      <div class="tools-categories">
+        <div>
+          <div class="tool-cat-label">Управление и процессы</div>
+          <div class="tools-row">
+            <div class="tool-item">
+              <span class="tool-icon">📋</span>
+              <div class="tool-text">
+                <span class="tool-name">Asana</span>
+                <span class="tool-desc">Планирование команды</span>
+              </div>
+            </div>
+            <div class="tool-item">
+              <span class="tool-icon">📄</span>
+              <div class="tool-text">
+                <span class="tool-name">Google Docs</span>
+                <span class="tool-desc">Совместная редактура</span>
+              </div>
+            </div>
+            <div class="tool-item">
+              <span class="tool-icon">📝</span>
+              <div class="tool-text">
+                <span class="tool-name">Notion</span>
+                <span class="tool-desc">База знаний, регламенты, онбординг</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="tool-cat-label">Аналитика</div>
+          <div class="tools-row">
+            <div class="tool-item">
+              <span class="tool-icon">📊</span>
+              <div class="tool-text">
+                <span class="tool-name">DataLens</span>
+                <span class="tool-desc">Дашборды по лидам</span>
+              </div>
+            </div>
+            <div class="tool-item">
+              <span class="tool-icon">📈</span>
+              <div class="tool-text">
+                <span class="tool-name">TGStat</span>
+                <span class="tool-desc">Аналитика каналов</span>
+              </div>
+            </div>
+            <div class="tool-item">
+              <span class="tool-icon">📉</span>
+              <div class="tool-text">
+                <span class="tool-name">LiveDune</span>
+                <span class="tool-desc">Аналитика соцсетей</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="tool-cat-label">Лидогенерация и воронки</div>
+          <div class="tools-row">
+            <div class="tool-item">
+              <span class="tool-icon">🤖</span>
+              <div class="tool-text">
+                <span class="tool-name">ManyChat</span>
+                <span class="tool-desc">Боты и воронки</span>
+              </div>
+            </div>
+            <div class="tool-item">
+              <span class="tool-icon">✅</span>
+              <div class="tool-text">
+                <span class="tool-name">Marquiz</span>
+                <span class="tool-desc">Квизы и лидмагниты</span>
+              </div>
+            </div>
+            <div class="tool-item">
+              <span class="tool-icon">💼</span>
+              <div class="tool-text">
+                <span class="tool-name">amoCRM</span>
+                <span class="tool-desc">Интеграция лидов</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="tool-cat-label">AI-инструменты</div>
+          <div class="tools-row">
+            <div class="tool-item">
+              <span class="tool-icon">🧠</span>
+              <div class="tool-text">
+                <span class="tool-name">ChatGPT</span>
+                <span class="tool-desc">Черновики, ресерч, формулировки</span>
+              </div>
+            </div>
+            <div class="tool-item">
+              <span class="tool-icon">✨</span>
+              <div class="tool-text">
+                <span class="tool-name">Gemini</span>
+                <span class="tool-desc">Анализ и суммаризация</span>
+              </div>
+            </div>
+            <div class="tool-item">
+              <span class="tool-icon">💬</span>
+              <div class="tool-text">
+                <span class="tool-name">Claude</span>
+                <span class="tool-desc">Черновики и структура</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-main">
+        <div class="section-eyebrow reveal">Контакт</div>
+        <h2 class="contact-big reveal">Если мой опыт вам подходит,<br><span>напишите мне</span></h2>
+        <p class="contact-sub reveal">Рассматриваю предложения на роли руководителя контент-команды, шеф-редактора и руководителя редакции. Быстрее всего связаться со мной в Telegram, но можно и по почте или телефону.</p>
+        <div class="contact-links reveal">
+          <a href="https://t.me/shmaxim99" class="contact-link" target="_blank" onclick="trackGoal('telegram_click')">
+            <div class="contact-link-icon">✈</div>
+            <div>
+              <span class="contact-link-label">Telegram</span>
+              @shmaxim99
+            </div>
+          </a>
+          <a href="mailto:sharovmaxim99@gmail.com" class="contact-link" onclick="trackGoal('email_click')">
+            <div class="contact-link-icon">@</div>
+            <div>
+              <span class="contact-link-label">Email</span>
+              sharovmaxim99@gmail.com
+            </div>
+          </a>
+          <a href="tel:+79377208903" class="contact-link" onclick="trackGoal('phone_click')">
+            <div class="contact-link-icon">☎</div>
+            <div>
+              <span class="contact-link-label">Телефон</span>
+              +7 (937) 720-89-03
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-side reveal reveal-delay-1">
+        <a href="https://t.me/shmaxim99" class="btn-primary contact-primary" target="_blank" onclick="trackGoal('telegram_button_click')">Написать в Telegram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="materials">
+  <div class="section-inner">
+    <div class="materials-wrap">
+      <div class="materials-card reveal">
+        <div class="materials-card-title">Если понадобится, могу прислать дополнительные материалы</div>
+        <div class="materials-label">Могу показать</div>
+        <ul class="materials-list">
+          <li>презентацию с концепцией канала про элитную недвижимость</li>
+          <li>систему онбординга авторов</li>
+          <li>подтверждение результатов скринами из дашбордов</li>
+          <li>примеры контент-стратегий, лидмагнитов и воронок</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Максим Шаров</span>
+  <span style="display:flex; gap: 20px; align-items: center;">
+    <a href="https://t.me/shmaxim99" style="color: var(--muted); text-decoration: none; transition: color 0.2s;" target="_blank">Telegram</a>
+    <a href="mailto:sharovmaxim99@gmail.com" style="color: var(--muted); text-decoration: none; transition: color 0.2s;">Email</a>
+  </span>
+</footer>
+
+<a href="#hero" class="back-to-top" id="backToTop" aria-label="Вернуться наверх">↑</a>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  const backToTop = document.getElementById('backToTop');
+  const toggleBackToTop = () => {
+    backToTop.classList.toggle('visible', window.scrollY > 420);
+  };
+  toggleBackToTop();
+  window.addEventListener('scroll', toggleBackToTop, { passive: true });
+
+  function switchCase(i) {
+    document.querySelectorAll('.case-tab').forEach((t,idx) => t.classList.toggle('active', idx === i));
+    document.querySelectorAll('.case-panel').forEach((p,idx) => p.classList.toggle('active', idx === i));
+  }
+
+  const quizQuestions = [
+    'Текущая ситуация',
+    'Роль соцсетей',
+    'Главное ожидание от шеф-редактора'
+  ];
+  const quizAnswers = [];
+  let qStep = 0;
+
+  function saveQuizAnswer(optionEl) {
+    if (!optionEl) return;
+    quizAnswers[qStep] = optionEl.textContent.trim();
+  }
+
+  function renderQuizSummary() {
+    const summary = document.getElementById('quizSummary');
+    if (!summary) return;
+    summary.innerHTML = '';
+
+    quizAnswers.forEach((answer, index) => {
+      if (!answer) return;
+      const item = document.createElement('div');
+      item.className = 'quiz-summary-item';
+      item.innerHTML = '<strong>' + quizQuestions[index] + ':</strong> ' + answer;
+      summary.appendChild(item);
+    });
+  }
+
+  function nextQ(step, optionEl) {
+    saveQuizAnswer(optionEl);
+    document.getElementById('step' + qStep).classList.remove('active');
+    qStep = step;
+    document.getElementById('step' + step).classList.add('active');
+    document.getElementById('d' + step).classList.add('done');
+  }
+  function showRes(optionEl) {
+    saveQuizAnswer(optionEl);
+    document.getElementById('step' + qStep).classList.remove('active');
+    renderQuizSummary();
+    document.getElementById('result').classList.add('active');
+    trackGoal('quiz_complete');
+  }
+
+  function submitQuizLeadForm(event) {
+    const endpoint = String((window.SITE_FORMS && window.SITE_FORMS.quizLeadEndpoint) || '').trim();
+    const status = document.getElementById('quizLeadStatus');
+    const form = document.getElementById('quizLeadForm');
+    const contact = document.getElementById('quizContact').value.trim();
+    const name = document.getElementById('quizName').value.trim();
+    const comment = document.getElementById('quizComment').value.trim();
+
+    event.preventDefault();
+
+    status.textContent = '';
+    status.className = 'quiz-form-status';
+
+    if (!contact) {
+      status.textContent = 'Оставьте хотя бы один контакт, чтобы я мог с вами связаться.';
+      status.classList.add('error');
+      return false;
+    }
+
+    if (!endpoint) {
+      status.textContent = 'Форма ещё не подключена к таблице. Если хотите, я подготовил для этого простую схему через Google Sheets.';
+      status.classList.add('error');
+      return false;
+    }
+
+    document.getElementById('quizLeadName').value = name;
+    document.getElementById('quizLeadContact').value = contact;
+    document.getElementById('quizLeadComment').value = comment;
+    document.getElementById('quizLeadSituation').value = quizAnswers[0] || '';
+    document.getElementById('quizLeadSocials').value = quizAnswers[1] || '';
+    document.getElementById('quizLeadExpectation').value = quizAnswers[2] || '';
+    document.getElementById('quizLeadPageUrl').value = window.location.href;
+    document.getElementById('quizLeadUserAgent').value = navigator.userAgent;
+
+    form.action = endpoint;
+    form.submit();
+
+    status.textContent = 'Контакт отправлен. Я свяжусь с вами по указанным данным.';
+    status.classList.add('success');
+    window.setTimeout(() => form.reset(), 200);
+    trackGoal('quiz_lead_submit');
+    return false;
+  }
+</script>
+
+</body>
+</html>
