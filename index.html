@@ -936,21 +936,21 @@
             <div class="contact-link-icon">✈</div>
             <div>
               <span class="contact-link-label">Telegram</span>
-              @shmaxim99
+              Быстрее всего отвечаю здесь
             </div>
           </a>
-          <a href="mailto:sharovmaxim99@gmail.com" class="contact-link" onclick="trackGoal('email_click')">
+          <a href="#" class="contact-link" id="contactEmailLink" onclick="trackGoal('email_click')">
             <div class="contact-link-icon">@</div>
             <div>
-              <span class="contact-link-label">Email</span>
-              sharovmaxim99@gmail.com
+              <span class="contact-link-label">Написать на почту</span>
+              <span id="contactEmailText">Почта загружается…</span>
             </div>
           </a>
-          <a href="tel:+79377208903" class="contact-link" onclick="trackGoal('phone_click')">
+          <a href="#" class="contact-link" id="contactPhoneLink" onclick="trackGoal('phone_click')">
             <div class="contact-link-icon">☎</div>
             <div>
-              <span class="contact-link-label">Телефон</span>
-              +7 (937) 720-89-03
+              <span class="contact-link-label">Связаться по телефону</span>
+              <span id="contactPhoneText">Номер загружается…</span>
             </div>
           </a>
         </div>
@@ -983,7 +983,7 @@
   <span>© 2026 Максим Шаров</span>
   <span style="display:flex; gap: 20px; align-items: center;">
     <a href="https://t.me/shmaxim99" style="color: var(--muted); text-decoration: none; transition: color 0.2s;" target="_blank">Telegram</a>
-    <a href="mailto:sharovmaxim99@gmail.com" style="color: var(--muted); text-decoration: none; transition: color 0.2s;">Email</a>
+    <a href="#" id="footerEmailLink" style="color: var(--muted); text-decoration: none; transition: color 0.2s;">Почта</a>
   </span>
 </footer>
 
@@ -1006,6 +1006,34 @@
   function switchCase(i) {
     document.querySelectorAll('.case-tab').forEach((t,idx) => t.classList.toggle('active', idx === i));
     document.querySelectorAll('.case-panel').forEach((p,idx) => p.classList.toggle('active', idx === i));
+  }
+
+  function hydratePublicContacts() {
+    const emailUser = ['sharov', 'maxim99'].join('');
+    const emailDomain = ['gmail', 'com'].join('.');
+    const email = emailUser + '@' + emailDomain;
+    const phoneDisplay = ['+7', ' (937) ', '720', '-', '89', '-', '03'].join('');
+    const phoneHref = ['+7', '937', '720', '89', '03'].join('');
+
+    const emailLinks = document.querySelectorAll('#contactEmailLink, #footerEmailLink');
+    emailLinks.forEach((link) => {
+      link.setAttribute('href', 'mailto:' + email);
+    });
+
+    const contactEmailText = document.getElementById('contactEmailText');
+    if (contactEmailText) {
+      contactEmailText.textContent = email;
+    }
+
+    const phoneLink = document.getElementById('contactPhoneLink');
+    if (phoneLink) {
+      phoneLink.setAttribute('href', 'tel:' + phoneHref);
+    }
+
+    const phoneText = document.getElementById('contactPhoneText');
+    if (phoneText) {
+      phoneText.textContent = phoneDisplay;
+    }
   }
 
   const quizQuestions = [
@@ -1050,6 +1078,11 @@
     }
   }
 
+  function isQuizResultVisible() {
+    const resultStep = document.getElementById('result');
+    return Boolean(resultStep && resultStep.classList.contains('active'));
+  }
+
   function renderQuizTurnstile() {
     const siteKey = getQuizTurnstileSiteKey();
     const wrap = document.getElementById('quizCaptchaWrap');
@@ -1062,6 +1095,8 @@
       wrap.classList.add('is-hidden');
       return;
     }
+
+    if (!isQuizResultVisible()) return;
 
     wrap.classList.remove('is-hidden');
 
@@ -1240,7 +1275,7 @@
   }
 
   window.addEventListener('message', handleQuizLeadMessage);
-  initQuizTurnstile();
+  hydratePublicContacts();
 </script>
 
 </body>
