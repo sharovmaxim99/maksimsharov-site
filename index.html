@@ -9,17 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Mulish:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <script>
   window.SITE_ANALYTICS = {
-    // Replace 0 with your counter ID from Yandex Metrica.
     yandexMetricaId: 108455613
   };
 </script>
 <script>
   window.SITE_FORMS = {
-    // Paste here the deployed Google Apps Script web app URL.
     quizLeadEndpoint: "https://script.google.com/macros/s/AKfycbwW9ELBZ6mMloCCo22ZBm71azcq1OnFjKWm938XhO9Ba-wJK3YVteKaVdc-jTUduAUHXg/exec",
-    // Paste here the Cloudflare Turnstile sitekey for the quiz form.
-    turnstileSiteKey: "0x4AAAAAAC8xasa4LwRTj60Z",
-    turnstileAction: "quiz_lead"
+    smartCaptchaClientKey: "",
+    smartCaptchaInvisible: true
   };
 </script>
 <script>
@@ -84,7 +81,6 @@
     overflow-x: hidden;
   }
 
-  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 18px 48px;
@@ -98,7 +94,6 @@
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
   .nav-links a:hover { color: var(--white); }
 
-  /* STATUS PILL */
   .status-pill {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(255,255,255,0.03); border: 1px solid var(--border);
@@ -109,7 +104,6 @@
   .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
   @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
-  /* HERO */
   #hero {
     min-height: 100vh; max-width: 1080px; margin: 0 auto; padding: 130px 40px 80px;
     display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center;
@@ -155,19 +149,16 @@
   .btn-secondary { background: transparent; color: var(--white); padding: 14px 32px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 14px; letter-spacing: 0.04em; transition: all 0.2s; border: 2px solid rgba(255,255,255,0.15); }
   .btn-secondary:hover { border-color: rgba(255,255,255,0.4); }
 
-  /* PHOTO FRAME */
   .hero-right { display: flex; justify-content: center; align-items: center; opacity: 0; transform: scale(0.92); animation: fadeIn 1s ease forwards 0.5s; }
   .photo-frame {
     width: 360px; height: 440px; border-radius: 16px; overflow: hidden; position: relative;
     border: 1px solid rgba(255,255,255,0.06);
   }
   .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 14%; display: block; }
-  /* SECTION COMMON */
   .section-inner { max-width: 1080px; margin: 0 auto; padding: 90px 40px; }
   .section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
   .section-title { font-family: 'Unbounded', sans-serif; font-size: clamp(26px, 3.5vw, 44px); font-weight: 900; line-height: 1.1; margin-bottom: 52px; }
 
-  /* ABOUT */
   #about { border-top: 1px solid var(--border); }
   .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: start; }
   .about-text p { color: var(--text-mid); margin-bottom: 18px; font-size: 15px; }
@@ -180,7 +171,6 @@
   .skill-item { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--text-mid); }
   .skill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 
-  /* NUMBERS */
   #numbers { background: var(--mid); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .numbers-intro { font-size: 15px; color: var(--text-soft); max-width: 540px; margin-bottom: 52px; line-height: 1.8; }
   .numbers-intro strong { color: var(--text-strong); font-weight: 500; }
@@ -192,7 +182,6 @@
   .number-context { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
   .number-label { font-size: 13px; color: var(--text-faint); line-height: 1.55; max-width: 200px; }
 
-  /* SERVICES */
   #services { border-top: 1px solid var(--border); }
   .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); border-radius: 12px; overflow: hidden; }
   .service-card { background: var(--black); padding: 40px; transition: background 0.25s; }
@@ -202,7 +191,6 @@
   .service-desc { font-size: 14px; color: var(--text-soft); line-height: 1.75; }
   .service-tag { display: inline-block; margin-top: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent2); background: rgba(255,179,71,0.07); border: 1px solid rgba(255,179,71,0.18); padding: 4px 12px; border-radius: 100px; }
 
-  /* CASES SLIDER */
   #cases { border-top: 1px solid var(--border); background: #0a0a0a; }
   .cases-tabs { display: flex; gap: 2px; margin-bottom: 2px; background: var(--border); border-radius: 12px 12px 0 0; overflow: hidden; }
   .case-tab {
@@ -226,7 +214,6 @@
   .case-metric-val { font-family: 'Unbounded', sans-serif; font-size: 26px; font-weight: 900; color: var(--accent2); display: block; margin-bottom: 4px; }
   .case-metric-label { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.09em; }
 
-  /* QUIZ */
   #quiz { border-top: 1px solid var(--border); }
   .quiz-inner { max-width: 660px; margin: 0 auto; padding: 90px 40px; }
   .quiz-card { background: var(--mid); border: 1px solid var(--border); border-radius: 16px; padding: 44px; text-align: center; }
@@ -274,15 +261,6 @@
     background: rgba(232,64,27,0.04);
   }
   .quiz-form-textarea { min-height: 108px; resize: vertical; }
-  .quiz-captcha-wrap { margin-top: 6px; }
-  .quiz-captcha-wrap.is-hidden { display: none; }
-  .quiz-captcha-slot {
-    min-height: 66px;
-    padding: 12px;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: rgba(255,255,255,0.02);
-  }
   .quiz-honeypot {
     position: absolute !important;
     left: -9999px !important;
@@ -301,7 +279,6 @@
   .quiz-form-status.error { color: rgba(232,64,27,0.92); }
   .quiz-form-status.pending { color: var(--text-soft); }
 
-  /* EXPERIENCE */
   #experience { border-top: 1px solid var(--border); }
   #tools { border-top: 1px solid var(--border); background: #0f0f0f; }
   .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
@@ -314,7 +291,6 @@
   .timeline-company { font-size: 13px; color: var(--accent); margin-bottom: 10px; font-weight: 500; }
   .timeline-desc { font-size: 13px; color: var(--text-faint); line-height: 1.65; }
 
-  /* TOOLS */
   .tools-panel { }
   .tools-panel-title { font-family: 'Unbounded', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 28px; }
   .tools-categories { display: flex; flex-direction: column; gap: 24px; }
@@ -327,7 +303,6 @@
   .tool-name { font-size: 13px; font-weight: 600; color: var(--white); display: block; }
   .tool-desc { font-size: 11px; color: var(--text-faint); display: block; margin-top: 1px; }
 
-  /* CONTACT */
   #contact { border-top: 1px solid var(--border); background: var(--mid); }
   .contact-grid { display: grid; grid-template-columns: minmax(0, 700px) 1fr; gap: 56px; align-items: start; }
   .contact-main { max-width: 700px; }
@@ -346,13 +321,6 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 12px;
-  }
-  .contact-method-value {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--text-strong);
-    word-break: break-word;
   }
   .contact-side { display: flex; justify-content: flex-end; padding-top: 106px; }
   .contact-primary { white-space: nowrap; }
@@ -367,7 +335,6 @@
   .materials-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
   .materials-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
 
-  /* BACK TO TOP */
   .back-to-top {
     position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(14px);
     width: 48px; height: 48px; border-radius: 999px;
@@ -391,10 +358,8 @@
     transform: translateX(-50%) translateY(0);
   }
 
-  /* FOOTER */
   footer { border-top: 1px solid var(--border); padding: 36px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-faint); }
 
-  /* ANIMATIONS */
   @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeIn { to { opacity: 1; transform: scale(1); } }
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
@@ -444,7 +409,6 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-glow"></div>
   <div class="hero-left">
@@ -472,7 +436,6 @@
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="section-inner">
     <div class="about-grid">
@@ -509,7 +472,6 @@
   </div>
 </section>
 
-<!-- NUMBERS -->
 <section id="numbers">
   <div class="section-inner">
     <div class="section-eyebrow reveal">Цифры</div>
@@ -550,7 +512,6 @@
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="section-inner">
     <div class="section-eyebrow reveal">Чем могу помочь</div>
@@ -584,7 +545,6 @@
   </div>
 </section>
 
-<!-- CASES SLIDER -->
 <section id="cases">
   <div class="section-inner">
     <div class="section-eyebrow reveal">Кейсы</div>
@@ -699,7 +659,6 @@
   </div>
 </section>
 
-<!-- QUIZ -->
 <section id="quiz">
   <div class="quiz-inner">
     <div class="section-eyebrow reveal" style="text-align:center;">Пара вопросов</div>
@@ -756,11 +715,8 @@
               <label class="quiz-form-label" for="quizComment">Что за задача</label>
               <textarea class="quiz-form-textarea" id="quizComment" placeholder="Например: нужен шеф-редактор, надо собрать процессы, хотим проверить соцсети как канал лидогенерации"></textarea>
             </div>
-            <div class="quiz-form-field full quiz-captcha-wrap" id="quizCaptchaWrap">
-              <label class="quiz-form-label" for="quizTurnstile">Проверка, что вы не бот</label>
-              <div class="quiz-captcha-slot" id="quizTurnstile"></div>
-            </div>
           </div>
+          <div id="quizSmartCaptchaContainer" style="min-height:1px;"></div>
           <input type="text" name="website" id="quizWebsite" class="quiz-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input type="hidden" name="name" id="quizLeadName">
           <input type="hidden" name="contact" id="quizLeadContact">
@@ -770,7 +726,7 @@
           <input type="hidden" name="quizExpectation" id="quizLeadExpectation">
           <input type="hidden" name="pageUrl" id="quizLeadPageUrl">
           <input type="hidden" name="userAgent" id="quizLeadUserAgent">
-          <input type="hidden" name="turnstileToken" id="quizTurnstileToken">
+          <input type="hidden" name="smartToken" id="quizSmartToken">
           <div class="quiz-lead-actions">
             <a href="https://t.me/shmaxim99" class="btn-primary" target="_blank" onclick="trackGoal('quiz_telegram_click')">Написать в Telegram</a>
             <button type="submit" class="btn-secondary" id="quizLeadSubmit" style="cursor:pointer;">Оставить контакт</button>
@@ -783,7 +739,6 @@
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-inner">
     <div class="section-eyebrow reveal">Опыт</div>
@@ -823,7 +778,6 @@
   </div>
 </section>
 
-<!-- TOOLS -->
 <section id="tools">
   <div class="section-inner">
     <div class="section-eyebrow reveal">Инструменты</div>
@@ -939,7 +893,6 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
     <div class="contact-grid">
@@ -950,11 +903,9 @@
         <div class="contact-methods reveal">
           <div class="contact-method">
             <a href="#" class="btn-secondary" id="contactEmailButton" onclick="trackGoal('email_click')">Написать на почту</a>
-            <div class="contact-method-value" id="contactEmailText">Почта загружается…</div>
           </div>
           <div class="contact-method">
             <a href="#" class="btn-secondary" id="contactPhoneButton" onclick="trackGoal('phone_click')">Связаться по телефону</a>
-            <div class="contact-method-value" id="contactPhoneText">Номер загружается…</div>
           </div>
         </div>
       </div>
@@ -1015,7 +966,6 @@
     const emailUser = ['sharov', 'maxim99'].join('');
     const emailDomain = ['gmail', 'com'].join('.');
     const email = emailUser + '@' + emailDomain;
-    const phoneDisplay = ['+7', ' (937) ', '720', '-', '89', '-', '03'].join('');
     const phoneHref = ['+7', '937', '720', '89', '03'].join('');
 
     const emailLinks = document.querySelectorAll('#contactEmailButton, #footerEmailLink');
@@ -1023,19 +973,9 @@
       link.setAttribute('href', 'mailto:' + email);
     });
 
-    const contactEmailText = document.getElementById('contactEmailText');
-    if (contactEmailText) {
-      contactEmailText.textContent = email;
-    }
-
     const phoneLink = document.getElementById('contactPhoneButton');
     if (phoneLink) {
       phoneLink.setAttribute('href', 'tel:' + phoneHref);
-    }
-
-    const phoneText = document.getElementById('contactPhoneText');
-    if (phoneText) {
-      phoneText.textContent = phoneDisplay;
     }
   }
 
@@ -1046,15 +986,16 @@
   ];
   const quizAnswers = [];
   let qStep = 0;
-  let quizTurnstileWidgetId = null;
-  let quizTurnstileLoading = false;
+  let quizSmartCaptchaWidgetId = null;
+  let quizSmartCaptchaLoading = false;
+  let quizSmartCaptchaReady = false;
 
-  function getQuizTurnstileSiteKey() {
-    return String((window.SITE_FORMS && window.SITE_FORMS.turnstileSiteKey) || '').trim();
+  function getQuizSmartCaptchaClientKey() {
+    return String((window.SITE_FORMS && window.SITE_FORMS.smartCaptchaClientKey) || '').trim();
   }
 
-  function getQuizTurnstileAction() {
-    return String((window.SITE_FORMS && window.SITE_FORMS.turnstileAction) || 'quiz_lead').trim() || 'quiz_lead';
+  function isQuizSmartCaptchaInvisible() {
+    return Boolean(window.SITE_FORMS && window.SITE_FORMS.smartCaptchaInvisible !== false);
   }
 
   function setQuizLeadStatus(message, state) {
@@ -1073,90 +1014,90 @@
     submitButton.disabled = Boolean(isDisabled);
   }
 
-  function resetQuizTurnstile() {
-    const tokenField = document.getElementById('quizTurnstileToken');
+  function resetQuizSmartCaptcha() {
+    const tokenField = document.getElementById('quizSmartToken');
     if (tokenField) tokenField.value = '';
-    if (window.turnstile && quizTurnstileWidgetId !== null) {
-      window.turnstile.reset(quizTurnstileWidgetId);
+    if (window.smartCaptcha && quizSmartCaptchaWidgetId !== null) {
+      window.smartCaptcha.reset(quizSmartCaptchaWidgetId);
     }
   }
 
-  function isQuizResultVisible() {
-    const resultStep = document.getElementById('result');
-    return Boolean(resultStep && resultStep.classList.contains('active'));
+  function buildQuizLeadPayload() {
+    return {
+      name: document.getElementById('quizName').value.trim(),
+      contact: document.getElementById('quizContact').value.trim(),
+      comment: document.getElementById('quizComment').value.trim()
+    };
   }
 
-  function renderQuizTurnstile() {
-    const siteKey = getQuizTurnstileSiteKey();
-    const wrap = document.getElementById('quizCaptchaWrap');
-    const slot = document.getElementById('quizTurnstile');
-    const tokenField = document.getElementById('quizTurnstileToken');
+  function fillQuizLeadHiddenFields(payload, smartToken) {
+    document.getElementById('quizLeadName').value = payload.name;
+    document.getElementById('quizLeadContact').value = payload.contact;
+    document.getElementById('quizLeadComment').value = payload.comment;
+    document.getElementById('quizLeadSituation').value = quizAnswers[0] || '';
+    document.getElementById('quizLeadSocials').value = quizAnswers[1] || '';
+    document.getElementById('quizLeadExpectation').value = quizAnswers[2] || '';
+    document.getElementById('quizLeadPageUrl').value = window.location.href;
+    document.getElementById('quizLeadUserAgent').value = navigator.userAgent;
+    document.getElementById('quizSmartToken').value = smartToken;
+  }
 
-    if (!wrap || !slot) return;
+  function submitQuizLeadToEndpoint(token) {
+    const endpoint = String((window.SITE_FORMS && window.SITE_FORMS.quizLeadEndpoint) || '').trim();
+    const form = document.getElementById('quizLeadForm');
+    const payload = buildQuizLeadPayload();
 
-    if (!siteKey) {
-      wrap.classList.add('is-hidden');
-      return;
-    }
+    fillQuizLeadHiddenFields(payload, token);
+    form.action = endpoint;
+    setQuizLeadStatus('Отправляю контакт...', 'pending');
+    form.submit();
+  }
 
-    if (!isQuizResultVisible()) return;
+  function renderQuizSmartCaptcha() {
+    const clientKey = getQuizSmartCaptchaClientKey();
+    const slot = document.getElementById('quizSmartCaptchaContainer');
 
-    wrap.classList.remove('is-hidden');
+    if (!slot || !clientKey || !window.smartCaptcha || quizSmartCaptchaWidgetId !== null) return;
 
-    if (!window.turnstile || quizTurnstileWidgetId !== null) return;
-
-    quizTurnstileWidgetId = window.turnstile.render('#quizTurnstile', {
-      sitekey: siteKey,
-      theme: 'dark',
-      action: getQuizTurnstileAction(),
+    quizSmartCaptchaWidgetId = window.smartCaptcha.render('quizSmartCaptchaContainer', {
+      sitekey: clientKey,
+      invisible: isQuizSmartCaptchaInvisible(),
+      hl: 'ru',
       callback: function (token) {
-        if (tokenField) tokenField.value = token;
         const status = document.getElementById('quizLeadStatus');
         if (status && status.classList.contains('error')) {
           setQuizLeadStatus('');
         }
-      },
-      'expired-callback': function () {
-        if (tokenField) tokenField.value = '';
-        setQuizLeadStatus('Проверка истекла. Обновите капчу и попробуйте ещё раз.', 'error');
-      },
-      'error-callback': function () {
-        if (tokenField) tokenField.value = '';
-        setQuizLeadStatus('Не удалось загрузить капчу. Обновите страницу и попробуйте ещё раз.', 'error');
+        submitQuizLeadToEndpoint(token);
       }
     });
+
+    quizSmartCaptchaReady = true;
   }
 
-  function initQuizTurnstile() {
-    const siteKey = getQuizTurnstileSiteKey();
-    const wrap = document.getElementById('quizCaptchaWrap');
+  function initQuizSmartCaptcha() {
+    const clientKey = getQuizSmartCaptchaClientKey();
+    if (!clientKey) return;
 
-    if (!wrap) return;
-    if (!siteKey) {
-      wrap.classList.add('is-hidden');
+    if (window.smartCaptcha) {
+      renderQuizSmartCaptcha();
       return;
     }
 
-    if (window.turnstile) {
-      window.turnstile.ready(renderQuizTurnstile);
-      return;
-    }
+    if (quizSmartCaptchaLoading) return;
+    quizSmartCaptchaLoading = true;
 
-    if (quizTurnstileLoading) return;
-    quizTurnstileLoading = true;
+    window.quizSmartCaptchaOnLoad = function () {
+      quizSmartCaptchaLoading = false;
+      renderQuizSmartCaptcha();
+    };
 
     const script = document.createElement('script');
-    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.src = 'https://smartcaptcha.yandexcloud.net/captcha.js?render=onload&onload=quizSmartCaptchaOnLoad';
     script.async = true;
     script.defer = true;
-    script.onload = function () {
-      quizTurnstileLoading = false;
-      if (window.turnstile) {
-        window.turnstile.ready(renderQuizTurnstile);
-      }
-    };
     script.onerror = function () {
-      quizTurnstileLoading = false;
+      quizSmartCaptchaLoading = false;
       setQuizLeadStatus('Не удалось загрузить капчу. Проверьте соединение и попробуйте ещё раз.', 'error');
     };
     document.head.appendChild(script);
@@ -1183,7 +1124,7 @@
       trackGoal('quiz_lead_submit');
     }
 
-    resetQuizTurnstile();
+    resetQuizSmartCaptcha();
   }
 
   function saveQuizAnswer(optionEl) {
@@ -1217,25 +1158,21 @@
     document.getElementById('step' + qStep).classList.remove('active');
     renderQuizSummary();
     document.getElementById('result').classList.add('active');
-    initQuizTurnstile();
+    initQuizSmartCaptcha();
     trackGoal('quiz_complete');
   }
 
   function submitQuizLeadForm(event) {
     const endpoint = String((window.SITE_FORMS && window.SITE_FORMS.quizLeadEndpoint) || '').trim();
-    const form = document.getElementById('quizLeadForm');
-    const contact = document.getElementById('quizContact').value.trim();
-    const name = document.getElementById('quizName').value.trim();
-    const comment = document.getElementById('quizComment').value.trim();
+    const payload = buildQuizLeadPayload();
     const honeypot = document.getElementById('quizWebsite').value.trim();
-    const turnstileToken = document.getElementById('quizTurnstileToken').value.trim();
-    const turnstileSiteKey = getQuizTurnstileSiteKey();
+    const clientKey = getQuizSmartCaptchaClientKey();
 
     event.preventDefault();
 
     setQuizLeadStatus('');
 
-    if (!contact) {
+    if (!payload.contact) {
       setQuizLeadStatus('Оставьте хотя бы один контакт, чтобы я мог с вами связаться.', 'error');
       return false;
     }
@@ -1250,30 +1187,26 @@
       return false;
     }
 
-    if (!turnstileSiteKey) {
-      setQuizLeadStatus('Капча ещё не настроена. Добавьте sitekey Turnstile в конфиг сайта и попробуйте снова.', 'error');
+    if (!clientKey) {
+      setQuizLeadStatus('Капча ещё не настроена. Добавьте client key Яндекс SmartCaptcha в конфиг сайта и попробуйте снова.', 'error');
       return false;
     }
 
-    if (!turnstileToken) {
-      setQuizLeadStatus('Подтвердите, что вы не бот, и отправьте форму ещё раз.', 'error');
+    if (!window.smartCaptcha || quizSmartCaptchaWidgetId === null || !quizSmartCaptchaReady) {
+      setQuizLeadStatus('Капча ещё загружается. Подождите пару секунд и попробуйте снова.', 'error');
       return false;
     }
 
-    document.getElementById('quizLeadName').value = name;
-    document.getElementById('quizLeadContact').value = contact;
-    document.getElementById('quizLeadComment').value = comment;
-    document.getElementById('quizLeadSituation').value = quizAnswers[0] || '';
-    document.getElementById('quizLeadSocials').value = quizAnswers[1] || '';
-    document.getElementById('quizLeadExpectation').value = quizAnswers[2] || '';
-    document.getElementById('quizLeadPageUrl').value = window.location.href;
-    document.getElementById('quizLeadUserAgent').value = navigator.userAgent;
-    document.getElementById('quizTurnstileToken').value = turnstileToken;
-
-    form.action = endpoint;
     setQuizLeadSubmitDisabled(true);
-    setQuizLeadStatus('Отправляю контакт...', 'pending');
-    form.submit();
+    setQuizLeadStatus('Проверяю форму и отправляю контакт...', 'pending');
+
+    try {
+      window.smartCaptcha.execute(quizSmartCaptchaWidgetId);
+    } catch (error) {
+      setQuizLeadSubmitDisabled(false);
+      setQuizLeadStatus('Не удалось запустить капчу. Обновите страницу и попробуйте ещё раз.', 'error');
+    }
+
     return false;
   }
 
