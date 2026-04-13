@@ -334,11 +334,26 @@
   .contact-big { font-family: 'Unbounded', sans-serif; font-size: clamp(26px, 3.5vw, 46px); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
   .contact-big span { color: var(--accent); }
   .contact-sub { font-size: 15px; color: var(--text-soft); margin-bottom: 36px; line-height: 1.75; max-width: 460px; }
-  .contact-links { display: flex; flex-direction: column; gap: 12px; }
-  .contact-link { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--white); font-size: 14px; font-weight: 500; padding: 14px 18px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; transition: all 0.2s; }
-  .contact-link:hover { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.05); transform: translateX(4px); }
-  .contact-link-icon { width: 34px; height: 34px; border-radius: 8px; background: rgba(232,64,27,0.1); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-  .contact-link-label { font-size: 11px; color: var(--text-faint); letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 1px; }
+  .contact-methods { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; max-width: 760px; }
+  .contact-method {
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .contact-method .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  .contact-method-value {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-strong);
+    word-break: break-word;
+  }
   .contact-side { display: flex; justify-content: flex-end; padding-top: 106px; }
   .contact-primary { white-space: nowrap; }
   #materials { border-top: 1px solid var(--border); background: #171717; }
@@ -393,6 +408,7 @@
     .photo-frame { width: min(100%, 360px); height: 420px; }
     .about-grid, .exp-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
     .contact-side { justify-content: flex-start; padding-top: 0; }
+    .contact-methods { grid-template-columns: 1fr; }
     .numbers-grid { grid-template-columns: 1fr 1fr; }
     .services-grid { grid-template-columns: 1fr; }
     .cases-tabs { flex-direction: column; }
@@ -931,28 +947,15 @@
         <div class="section-eyebrow reveal">Контакт</div>
         <h2 class="contact-big reveal">Если мой опыт вам подходит,<br><span>напишите мне</span></h2>
         <p class="contact-sub reveal">Рассматриваю предложения на роли руководителя контент-команды, шеф-редактора и руководителя редакции. Быстрее всего связаться со мной в Telegram, но можно и по почте или телефону.</p>
-        <div class="contact-links reveal">
-          <a href="https://t.me/shmaxim99" class="contact-link" target="_blank" onclick="trackGoal('telegram_click')">
-            <div class="contact-link-icon">✈</div>
-            <div>
-              <span class="contact-link-label">Telegram</span>
-              Быстрее всего отвечаю здесь
-            </div>
-          </a>
-          <a href="#" class="contact-link" id="contactEmailLink" onclick="trackGoal('email_click')">
-            <div class="contact-link-icon">@</div>
-            <div>
-              <span class="contact-link-label">Написать на почту</span>
-              <span id="contactEmailText">Почта загружается…</span>
-            </div>
-          </a>
-          <a href="#" class="contact-link" id="contactPhoneLink" onclick="trackGoal('phone_click')">
-            <div class="contact-link-icon">☎</div>
-            <div>
-              <span class="contact-link-label">Связаться по телефону</span>
-              <span id="contactPhoneText">Номер загружается…</span>
-            </div>
-          </a>
+        <div class="contact-methods reveal">
+          <div class="contact-method">
+            <a href="#" class="btn-secondary" id="contactEmailButton" onclick="trackGoal('email_click')">Написать на почту</a>
+            <div class="contact-method-value" id="contactEmailText">Почта загружается…</div>
+          </div>
+          <div class="contact-method">
+            <a href="#" class="btn-secondary" id="contactPhoneButton" onclick="trackGoal('phone_click')">Связаться по телефону</a>
+            <div class="contact-method-value" id="contactPhoneText">Номер загружается…</div>
+          </div>
         </div>
       </div>
       <div class="contact-side reveal reveal-delay-1">
@@ -1015,7 +1018,7 @@
     const phoneDisplay = ['+7', ' (937) ', '720', '-', '89', '-', '03'].join('');
     const phoneHref = ['+7', '937', '720', '89', '03'].join('');
 
-    const emailLinks = document.querySelectorAll('#contactEmailLink, #footerEmailLink');
+    const emailLinks = document.querySelectorAll('#contactEmailButton, #footerEmailLink');
     emailLinks.forEach((link) => {
       link.setAttribute('href', 'mailto:' + email);
     });
@@ -1025,7 +1028,7 @@
       contactEmailText.textContent = email;
     }
 
-    const phoneLink = document.getElementById('contactPhoneLink');
+    const phoneLink = document.getElementById('contactPhoneButton');
     if (phoneLink) {
       phoneLink.setAttribute('href', 'tel:' + phoneHref);
     }
