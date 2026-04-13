@@ -16,7 +16,10 @@
 <script>
   window.SITE_FORMS = {
     // Paste here the deployed Google Apps Script web app URL.
-    quizLeadEndpoint: "https://script.google.com/macros/s/AKfycbwW9ELBZ6mMloCCo22ZBm71azcq1OnFjKWm938XhO9Ba-wJK3YVteKaVdc-jTUduAUHXg/exec"
+    quizLeadEndpoint: "https://script.google.com/macros/s/AKfycbwW9ELBZ6mMloCCo22ZBm71azcq1OnFjKWm938XhO9Ba-wJK3YVteKaVdc-jTUduAUHXg/exec",
+    // Paste here the Cloudflare Turnstile sitekey for the quiz form.
+    turnstileSiteKey: "0x4AAAAAAC8xasa4LwRTj60Z",
+    turnstileAction: "quiz_lead"
   };
 </script>
 <script>
@@ -271,10 +274,32 @@
     background: rgba(232,64,27,0.04);
   }
   .quiz-form-textarea { min-height: 108px; resize: vertical; }
+  .quiz-captcha-wrap { margin-top: 6px; }
+  .quiz-captcha-wrap.is-hidden { display: none; }
+  .quiz-captcha-slot {
+    min-height: 66px;
+    padding: 12px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.02);
+  }
+  .quiz-honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
   .quiz-lead-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+  .quiz-lead-actions .btn-secondary:disabled {
+    opacity: 0.55;
+    cursor: not-allowed !important;
+  }
   .quiz-form-status { min-height: 20px; margin-top: 14px; font-size: 12px; line-height: 1.65; color: var(--text-faint); }
   .quiz-form-status.success { color: rgba(255,179,71,0.92); }
   .quiz-form-status.error { color: rgba(232,64,27,0.92); }
+  .quiz-form-status.pending { color: var(--text-soft); }
 
   /* EXPERIENCE */
   #experience { border-top: 1px solid var(--border); }
@@ -715,7 +740,12 @@
               <label class="quiz-form-label" for="quizComment">Что за задача</label>
               <textarea class="quiz-form-textarea" id="quizComment" placeholder="Например: нужен шеф-редактор, надо собрать процессы, хотим проверить соцсети как канал лидогенерации"></textarea>
             </div>
+            <div class="quiz-form-field full quiz-captcha-wrap" id="quizCaptchaWrap">
+              <label class="quiz-form-label" for="quizTurnstile">Проверка, что вы не бот</label>
+              <div class="quiz-captcha-slot" id="quizTurnstile"></div>
+            </div>
           </div>
+          <input type="text" name="website" id="quizWebsite" class="quiz-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input type="hidden" name="name" id="quizLeadName">
           <input type="hidden" name="contact" id="quizLeadContact">
           <input type="hidden" name="comment" id="quizLeadComment">
@@ -724,6 +754,7 @@
           <input type="hidden" name="quizExpectation" id="quizLeadExpectation">
           <input type="hidden" name="pageUrl" id="quizLeadPageUrl">
           <input type="hidden" name="userAgent" id="quizLeadUserAgent">
+          <input type="hidden" name="turnstileToken" id="quizTurnstileToken">
           <div class="quiz-lead-actions">
             <a href="https://t.me/shmaxim99" class="btn-primary" target="_blank" onclick="trackGoal('quiz_telegram_click')">Написать в Telegram</a>
             <button type="submit" class="btn-secondary" id="quizLeadSubmit" style="cursor:pointer;">Оставить контакт</button>
@@ -984,6 +1015,138 @@
   ];
   const quizAnswers = [];
   let qStep = 0;
+  let quizTurnstileWidgetId = null;
+  let quizTurnstileLoading = false;
+
+  function getQuizTurnstileSiteKey() {
+    return String((window.SITE_FORMS && window.SITE_FORMS.turnstileSiteKey) || '').trim();
+  }
+
+  function getQuizTurnstileAction() {
+    return String((window.SITE_FORMS && window.SITE_FORMS.turnstileAction) || 'quiz_lead').trim() || 'quiz_lead';
+  }
+
+  function setQuizLeadStatus(message, state) {
+    const status = document.getElementById('quizLeadStatus');
+    if (!status) return;
+    status.textContent = message || '';
+    status.className = 'quiz-form-status';
+    if (state) {
+      status.classList.add(state);
+    }
+  }
+
+  function setQuizLeadSubmitDisabled(isDisabled) {
+    const submitButton = document.getElementById('quizLeadSubmit');
+    if (!submitButton) return;
+    submitButton.disabled = Boolean(isDisabled);
+  }
+
+  function resetQuizTurnstile() {
+    const tokenField = document.getElementById('quizTurnstileToken');
+    if (tokenField) tokenField.value = '';
+    if (window.turnstile && quizTurnstileWidgetId !== null) {
+      window.turnstile.reset(quizTurnstileWidgetId);
+    }
+  }
+
+  function renderQuizTurnstile() {
+    const siteKey = getQuizTurnstileSiteKey();
+    const wrap = document.getElementById('quizCaptchaWrap');
+    const slot = document.getElementById('quizTurnstile');
+    const tokenField = document.getElementById('quizTurnstileToken');
+
+    if (!wrap || !slot) return;
+
+    if (!siteKey) {
+      wrap.classList.add('is-hidden');
+      return;
+    }
+
+    wrap.classList.remove('is-hidden');
+
+    if (!window.turnstile || quizTurnstileWidgetId !== null) return;
+
+    quizTurnstileWidgetId = window.turnstile.render('#quizTurnstile', {
+      sitekey: siteKey,
+      theme: 'dark',
+      action: getQuizTurnstileAction(),
+      callback: function (token) {
+        if (tokenField) tokenField.value = token;
+        const status = document.getElementById('quizLeadStatus');
+        if (status && status.classList.contains('error')) {
+          setQuizLeadStatus('');
+        }
+      },
+      'expired-callback': function () {
+        if (tokenField) tokenField.value = '';
+        setQuizLeadStatus('Проверка истекла. Обновите капчу и попробуйте ещё раз.', 'error');
+      },
+      'error-callback': function () {
+        if (tokenField) tokenField.value = '';
+        setQuizLeadStatus('Не удалось загрузить капчу. Обновите страницу и попробуйте ещё раз.', 'error');
+      }
+    });
+  }
+
+  function initQuizTurnstile() {
+    const siteKey = getQuizTurnstileSiteKey();
+    const wrap = document.getElementById('quizCaptchaWrap');
+
+    if (!wrap) return;
+    if (!siteKey) {
+      wrap.classList.add('is-hidden');
+      return;
+    }
+
+    if (window.turnstile) {
+      window.turnstile.ready(renderQuizTurnstile);
+      return;
+    }
+
+    if (quizTurnstileLoading) return;
+    quizTurnstileLoading = true;
+
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.async = true;
+    script.defer = true;
+    script.onload = function () {
+      quizTurnstileLoading = false;
+      if (window.turnstile) {
+        window.turnstile.ready(renderQuizTurnstile);
+      }
+    };
+    script.onerror = function () {
+      quizTurnstileLoading = false;
+      setQuizLeadStatus('Не удалось загрузить капчу. Проверьте соединение и попробуйте ещё раз.', 'error');
+    };
+    document.head.appendChild(script);
+  }
+
+  function isTrustedQuizLeadOrigin(origin) {
+    return origin === 'https://script.google.com' || origin === 'https://script.googleusercontent.com';
+  }
+
+  function handleQuizLeadMessage(event) {
+    if (!isTrustedQuizLeadOrigin(event.origin)) return;
+
+    const payload = event.data;
+    if (!payload || payload.source !== 'quizLeadForm') return;
+
+    setQuizLeadSubmitDisabled(false);
+    setQuizLeadStatus(
+      payload.message || (payload.ok ? 'Контакт отправлен. Я свяжусь с вами по указанным данным.' : 'Не удалось отправить форму. Попробуйте ещё раз.'),
+      payload.ok ? 'success' : 'error'
+    );
+
+    if (payload.ok) {
+      document.getElementById('quizLeadForm').reset();
+      trackGoal('quiz_lead_submit');
+    }
+
+    resetQuizTurnstile();
+  }
 
   function saveQuizAnswer(optionEl) {
     if (!optionEl) return;
@@ -1016,31 +1179,46 @@
     document.getElementById('step' + qStep).classList.remove('active');
     renderQuizSummary();
     document.getElementById('result').classList.add('active');
+    initQuizTurnstile();
     trackGoal('quiz_complete');
   }
 
   function submitQuizLeadForm(event) {
     const endpoint = String((window.SITE_FORMS && window.SITE_FORMS.quizLeadEndpoint) || '').trim();
-    const status = document.getElementById('quizLeadStatus');
     const form = document.getElementById('quizLeadForm');
     const contact = document.getElementById('quizContact').value.trim();
     const name = document.getElementById('quizName').value.trim();
     const comment = document.getElementById('quizComment').value.trim();
+    const honeypot = document.getElementById('quizWebsite').value.trim();
+    const turnstileToken = document.getElementById('quizTurnstileToken').value.trim();
+    const turnstileSiteKey = getQuizTurnstileSiteKey();
 
     event.preventDefault();
 
-    status.textContent = '';
-    status.className = 'quiz-form-status';
+    setQuizLeadStatus('');
 
     if (!contact) {
-      status.textContent = 'Оставьте хотя бы один контакт, чтобы я мог с вами связаться.';
-      status.classList.add('error');
+      setQuizLeadStatus('Оставьте хотя бы один контакт, чтобы я мог с вами связаться.', 'error');
+      return false;
+    }
+
+    if (honeypot) {
+      setQuizLeadStatus('Форма не прошла проверку. Обновите страницу и попробуйте ещё раз.', 'error');
       return false;
     }
 
     if (!endpoint) {
-      status.textContent = 'Форма ещё не подключена к таблице. Если хотите, я подготовил для этого простую схему через Google Sheets.';
-      status.classList.add('error');
+      setQuizLeadStatus('Форма ещё не подключена к таблице. Если хотите, я подготовил для этого простую схему через Google Sheets.', 'error');
+      return false;
+    }
+
+    if (!turnstileSiteKey) {
+      setQuizLeadStatus('Капча ещё не настроена. Добавьте sitekey Turnstile в конфиг сайта и попробуйте снова.', 'error');
+      return false;
+    }
+
+    if (!turnstileToken) {
+      setQuizLeadStatus('Подтвердите, что вы не бот, и отправьте форму ещё раз.', 'error');
       return false;
     }
 
@@ -1052,16 +1230,17 @@
     document.getElementById('quizLeadExpectation').value = quizAnswers[2] || '';
     document.getElementById('quizLeadPageUrl').value = window.location.href;
     document.getElementById('quizLeadUserAgent').value = navigator.userAgent;
+    document.getElementById('quizTurnstileToken').value = turnstileToken;
 
     form.action = endpoint;
+    setQuizLeadSubmitDisabled(true);
+    setQuizLeadStatus('Отправляю контакт...', 'pending');
     form.submit();
-
-    status.textContent = 'Контакт отправлен. Я свяжусь с вами по указанным данным.';
-    status.classList.add('success');
-    window.setTimeout(() => form.reset(), 200);
-    trackGoal('quiz_lead_submit');
     return false;
   }
+
+  window.addEventListener('message', handleQuizLeadMessage);
+  initQuizTurnstile();
 </script>
 
 </body>
