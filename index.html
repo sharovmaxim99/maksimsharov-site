@@ -278,6 +278,34 @@
   .quiz-form-status.success { color: rgba(255,179,71,0.92); }
   .quiz-form-status.error { color: rgba(232,64,27,0.92); }
   .quiz-form-status.pending { color: var(--text-soft); }
+  .quiz-success-card {
+    display: none;
+    margin-top: 8px;
+    padding: 24px;
+    text-align: left;
+    border-radius: 14px;
+    border: 1px solid rgba(255,179,71,0.18);
+    background: rgba(255,179,71,0.05);
+  }
+  .quiz-success-card.visible { display: block; }
+  .quiz-success-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .quiz-success-text {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .quiz-success-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
 
   #experience { border-top: 1px solid var(--border); }
   #tools { border-top: 1px solid var(--border); background: #0f0f0f; }
@@ -759,6 +787,14 @@
           </div>
           <div class="quiz-form-status" id="quizLeadStatus"></div>
         </form>
+        <div class="quiz-success-card" id="quizLeadSuccess">
+          <div class="quiz-success-title">Контакт отправлен</div>
+          <div class="quiz-success-text" id="quizLeadSuccessText">Я свяжусь с вами по указанным данным. Если удобнее не ждать, можно сразу написать мне в Telegram.</div>
+          <div class="quiz-success-actions">
+            <a href="https://t.me/shmaxim99" class="btn-primary" target="_blank" onclick="trackGoal('quiz_telegram_click')">Написать в Telegram</a>
+            <button type="button" class="btn-secondary" id="quizLeadReset" style="cursor:pointer;">Отправить ещё один контакт</button>
+          </div>
+        </div>
         <iframe name="quizLeadTarget" id="quizLeadTarget" style="display:none;"></iframe>
       </div>
     </div>
@@ -1025,6 +1061,9 @@
   let quizSmartCaptchaWidgetId = null;
   let quizSmartCaptchaLoading = false;
   let quizSmartCaptchaReady = false;
+  let quizLeadResponseTimerId = null;
+  let quizLeadAwaitingResponse = false;
+  let quizLeadFallbackTimerId = null;
 
   function getQuizSmartCaptchaClientKey() {
     return String((window.SITE_FORMS && window.SITE_FORMS.smartCaptchaClientKey) || '').trim();
@@ -1048,6 +1087,54 @@
     const submitButton = document.getElementById('quizLeadSubmit');
     if (!submitButton) return;
     submitButton.disabled = Boolean(isDisabled);
+  }
+
+  function setQuizLeadSuccessVisible(isVisible, message) {
+    const form = document.getElementById('quizLeadForm');
+    const successCard = document.getElementById('quizLeadSuccess');
+    const successText = document.getElementById('quizLeadSuccessText');
+
+    if (successText && message) {
+      successText.textContent = message;
+    }
+
+    if (form) {
+      form.style.display = isVisible ? 'none' : '';
+    }
+
+    if (successCard) {
+      successCard.classList.toggle('visible', Boolean(isVisible));
+    }
+  }
+
+  function clearQuizLeadResponseTimer() {
+    if (!quizLeadResponseTimerId) return;
+    window.clearTimeout(quizLeadResponseTimerId);
+    quizLeadResponseTimerId = null;
+  }
+
+  function clearQuizLeadFallbackTimer() {
+    if (!quizLeadFallbackTimerId) return;
+    window.clearTimeout(quizLeadFallbackTimerId);
+    quizLeadFallbackTimerId = null;
+  }
+
+  function finalizeQuizLeadStatus(ok, message) {
+    clearQuizLeadResponseTimer();
+    clearQuizLeadFallbackTimer();
+    quizLeadAwaitingResponse = false;
+    setQuizLeadSubmitDisabled(false);
+    setQuizLeadSuccessVisible(Boolean(ok), message || 'Я свяжусь с вами по указанным данным. Если удобнее не ждать, можно сразу написать мне в Telegram.');
+
+    if (ok) {
+      document.getElementById('quizLeadForm').reset();
+      trackGoal('quiz_lead_submit');
+      setQuizLeadStatus('');
+    } else {
+      setQuizLeadStatus(message || 'Не удалось отправить форму. Попробуйте ещё раз.', 'error');
+    }
+
+    resetQuizSmartCaptcha();
   }
 
   function resetQuizSmartCaptcha() {
@@ -1085,7 +1172,13 @@
 
     fillQuizLeadHiddenFields(payload, token);
     form.action = endpoint;
+    quizLeadAwaitingResponse = true;
     setQuizLeadStatus('Отправляю контакт...', 'pending');
+    clearQuizLeadResponseTimer();
+    clearQuizLeadFallbackTimer();
+    quizLeadResponseTimerId = window.setTimeout(function () {
+      finalizeQuizLeadStatus(true, 'Контакт отправлен. Я свяжусь с вами по указанным данным.');
+    }, 6000);
     form.submit();
   }
 
@@ -1140,26 +1233,51 @@
   }
 
   function isTrustedQuizLeadOrigin(origin) {
-    return origin === 'https://script.google.com' || origin === 'https://script.googleusercontent.com';
+    try {
+      const parsedOrigin = new URL(origin);
+      const hostname = parsedOrigin.hostname.toLowerCase();
+      return parsedOrigin.protocol === 'https:' && (
+        hostname === 'script.google.com' ||
+        hostname === 'script.googleusercontent.com' ||
+        hostname.endsWith('.googleusercontent.com')
+      );
+    } catch (error) {
+      return false;
+    }
   }
 
   function handleQuizLeadMessage(event) {
     if (!isTrustedQuizLeadOrigin(event.origin)) return;
 
-    const payload = event.data;
+    const payload = typeof event.data === 'string'
+      ? (function () {
+          try {
+            return JSON.parse(event.data);
+          } catch (error) {
+            return null;
+          }
+        })()
+      : event.data;
     if (!payload || payload.source !== 'quizLeadForm') return;
 
+    finalizeQuizLeadStatus(Boolean(payload.ok), payload.message);
+  }
+
+  function handleQuizLeadFrameLoad() {
+    if (!quizLeadAwaitingResponse) return;
+
+    clearQuizLeadFallbackTimer();
+    quizLeadFallbackTimerId = window.setTimeout(function () {
+      if (!quizLeadAwaitingResponse) return;
+      finalizeQuizLeadStatus(true, 'Контакт отправлен. Я свяжусь с вами по указанным данным.');
+    }, 250);
+  }
+
+  function resetQuizLeadFormState() {
+    document.getElementById('quizLeadForm').reset();
+    setQuizLeadSuccessVisible(false);
+    setQuizLeadStatus('');
     setQuizLeadSubmitDisabled(false);
-    setQuizLeadStatus(
-      payload.message || (payload.ok ? 'Контакт отправлен. Я свяжусь с вами по указанным данным.' : 'Не удалось отправить форму. Попробуйте ещё раз.'),
-      payload.ok ? 'success' : 'error'
-    );
-
-    if (payload.ok) {
-      document.getElementById('quizLeadForm').reset();
-      trackGoal('quiz_lead_submit');
-    }
-
     resetQuizSmartCaptcha();
   }
 
@@ -1194,6 +1312,8 @@
     document.getElementById('step' + qStep).classList.remove('active');
     renderQuizSummary();
     document.getElementById('result').classList.add('active');
+    setQuizLeadSuccessVisible(false);
+    setQuizLeadStatus('');
     initQuizSmartCaptcha();
     trackGoal('quiz_complete');
   }
@@ -1247,6 +1367,8 @@
   }
 
   window.addEventListener('message', handleQuizLeadMessage);
+  document.getElementById('quizLeadTarget').addEventListener('load', handleQuizLeadFrameLoad);
+  document.getElementById('quizLeadReset').addEventListener('click', resetQuizLeadFormState);
   hydratePublicContacts();
 </script>
 
