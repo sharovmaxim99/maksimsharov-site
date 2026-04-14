@@ -789,9 +789,8 @@
         </form>
         <div class="quiz-success-card" id="quizLeadSuccess">
           <div class="quiz-success-title">Контакт отправлен</div>
-          <div class="quiz-success-text" id="quizLeadSuccessText">Я свяжусь с вами по указанным данным. Если удобнее не ждать, можно сразу написать мне в Telegram.</div>
+          <div class="quiz-success-text" id="quizLeadSuccessText">Я свяжусь с вами по указанным данным в рабочее время с 10 до 19 по МСК.</div>
           <div class="quiz-success-actions">
-            <a href="https://t.me/shmaxim99" class="btn-primary" target="_blank" onclick="trackGoal('quiz_telegram_click')">Написать в Telegram</a>
             <button type="button" class="btn-secondary" id="quizLeadReset" style="cursor:pointer;">Отправить ещё один контакт</button>
           </div>
         </div>
@@ -1093,6 +1092,8 @@
     const form = document.getElementById('quizLeadForm');
     const successCard = document.getElementById('quizLeadSuccess');
     const successText = document.getElementById('quizLeadSuccessText');
+    const resultText = document.querySelector('#result .quiz-result-text');
+    const summary = document.getElementById('quizSummary');
 
     if (successText && message) {
       successText.textContent = message;
@@ -1104,6 +1105,14 @@
 
     if (successCard) {
       successCard.classList.toggle('visible', Boolean(isVisible));
+    }
+
+    if (resultText) {
+      resultText.style.display = isVisible ? 'none' : '';
+    }
+
+    if (summary) {
+      summary.style.display = isVisible ? 'none' : '';
     }
   }
 
@@ -1124,7 +1133,7 @@
     clearQuizLeadFallbackTimer();
     quizLeadAwaitingResponse = false;
     setQuizLeadSubmitDisabled(false);
-    setQuizLeadSuccessVisible(Boolean(ok), message || 'Я свяжусь с вами по указанным данным. Если удобнее не ждать, можно сразу написать мне в Telegram.');
+    setQuizLeadSuccessVisible(Boolean(ok), message || 'Я свяжусь с вами по указанным данным в рабочее время с 10 до 19 по МСК.');
 
     if (ok) {
       document.getElementById('quizLeadForm').reset();
@@ -1177,7 +1186,7 @@
     clearQuizLeadResponseTimer();
     clearQuizLeadFallbackTimer();
     quizLeadResponseTimerId = window.setTimeout(function () {
-      finalizeQuizLeadStatus(true, 'Контакт отправлен. Я свяжусь с вами по указанным данным.');
+      finalizeQuizLeadStatus(true, 'Я свяжусь с вами по указанным данным в рабочее время с 10 до 19 по МСК.');
     }, 6000);
     form.submit();
   }
@@ -1269,7 +1278,7 @@
     clearQuizLeadFallbackTimer();
     quizLeadFallbackTimerId = window.setTimeout(function () {
       if (!quizLeadAwaitingResponse) return;
-      finalizeQuizLeadStatus(true, 'Контакт отправлен. Я свяжусь с вами по указанным данным.');
+      finalizeQuizLeadStatus(true, 'Я свяжусь с вами по указанным данным в рабочее время с 10 до 19 по МСК.');
     }, 250);
   }
 
