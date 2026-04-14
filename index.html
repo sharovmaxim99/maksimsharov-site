@@ -755,7 +755,7 @@
         <div class="quiz-summary" id="quizSummary"></div>
         <form class="quiz-lead-card" id="quizLeadForm" method="POST" target="quizLeadTarget" onsubmit="return submitQuizLeadForm(event)">
           <div class="quiz-lead-title">Последний шаг</div>
-          <div class="quiz-lead-sub">Оставьте контакт и пару слов о задаче. Если удобнее, можно сразу написать мне в Telegram. Если нет, я сам вернусь к вам по оставленным данным.</div>
+          <div class="quiz-lead-sub">Оставьте контакт и пару слов о задаче. Так я быстрее пойму контекст и свяжусь с вами уже по существу.</div>
           <div class="quiz-form-grid">
             <div class="quiz-form-field">
               <label class="quiz-form-label" for="quizName">Как к вам обращаться</label>
@@ -782,7 +782,6 @@
           <input type="hidden" name="userAgent" id="quizLeadUserAgent">
           <input type="hidden" name="smartToken" id="quizSmartToken">
           <div class="quiz-lead-actions">
-            <a href="https://t.me/shmaxim99" class="btn-primary" target="_blank" onclick="trackGoal('quiz_telegram_click')">Написать в Telegram</a>
             <button type="submit" class="btn-secondary" id="quizLeadSubmit" style="cursor:pointer;">Оставить контакт</button>
           </div>
           <div class="quiz-form-status" id="quizLeadStatus"></div>
